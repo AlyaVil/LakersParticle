@@ -1,0 +1,39 @@
+let inc = 0.1;
+let scl = 20; // Scale for drawing vectors
+let cols, rows; // column and rows for every scale(vectors)
+
+let zoff = 0;
+
+let fr; //framerate
+
+let particles = []; // particle variables
+
+let flowfield; // flowfield variables
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  cols = floor(width / scl); // column even number  
+  rows = floor(height / scl); // row even number
+  // pixelDensity(1);
+  fr = createP('');
+
+  flowfield = new Array(cols * rows);
+
+  for (let i = 0; i < 1000; i++) {
+    particles[i] = new Particle();
+  }
+  background(255,160,0);
+}
+
+function draw() {
+  // randomSeed(10); stopping let v randomness
+  let yoff = 0;
+  // loadPixels();
+  for (let y = 0; y < rows; y++) {
+    let xoff = 0;
+    for (let x = 0; x < cols; x++) {
+      let index = x + y * cols;
+      let angle = noise(xoff, yoff, zoff) * TWO_PI * 4;
+      let v = p5.Vector.fromAngle(angle); // weird vector random
+      v.setMag(0.5); // set magnitude
+      flowfield[index] = v;
