@@ -37,3 +37,49 @@ function draw() {
       let v = p5.Vector.fromAngle(angle); // weird vector random
       v.setMag(0.5); // set magnitude
       flowfield[index] = v;
+// let v = p5.Vector.fromAngle(angle);
+      // let r = random(255); // if using this function then all the pixels will be random like tv noise
+      // let r = noise(xoff, yoff) * 255;
+      // let v = p5.Vector.fromAngle(noise(xoff, yoff, yoff) * TWO_PI);
+      // let v = p5.Vector.fromAngle(PI/6); // weird vector in half
+      // let v = p5.Vector.fromAngle(random(TWO_PI)); // weird vector random
+      // let r = noise(xoff) * 255; // if using this function then all the pixels will x value (width)
+      // let r = noise(yoff) * 255;  // if using this function then all the pixels will y value (height)
+      // pixels[index + 0] = r;
+      // pixels[index + 1] = r;
+      // pixels[index + 2] = r;
+      // pixels[index + 3] = 255;
+      // fill(r);
+      // rect(x * scl, y * scl, scl, scl);
+      // execute only two lines above for disco dance floor effect
+      xoff += inc;
+      stroke(0, 110);
+      // push();
+      // translate(x * scl, y * scl);
+      // rotate(v.heading());
+      // strokeWeight(1);
+      // line(0, 0, scl, 0);
+
+
+      // pop();
+    }
+    yoff += inc;
+
+    zoff += 0.0001;
+  }
+  // updatePixels();
+  //noLoop();
+
+  for (let i = 0; i < particles.length; i++) {
+    particles[i].follow(flowfield);
+    particles[i].update();
+    particles[i].edges();
+    particles[i].show();
+
+  }
+
+
+  // particles[0].update();
+  // particles[0].show();
+  fr.html(floor(frameRate()));
+}
